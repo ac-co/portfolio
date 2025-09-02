@@ -3,22 +3,516 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Aslan Aouchev - Portfolio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #00c851 0%, #007e33 100%);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #333;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #666;
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .projects-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .projects-section h2 {
+      color: #333;
+      font-size: 2em;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .projects-section > p {
+      text-align: center;
+      color: #666;
+      font-size: 1.1em;
+      margin-bottom: 30px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .skill-category {
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 200, 81, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-category::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #00c851 0%, #007e33 100%);
+    }
+
+    .skill-category h3 {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.3em;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .skill-category h3::before {
+      content: '▶';
+      color: #00c851;
+      font-size: 0.8em;
+    }
+
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-item {
+      background: linear-gradient(135deg, #00c851 0%, #007e33 100%);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.9em;
+      font-weight: 500;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 25px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .project-image {
+      width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      background-color: #f0f0f0;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-title {
+      color: #333;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+    }
+
+    .project-description {
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .tech-tag {
+      background: #00c851;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 15px;
+      font-size: 0.8em;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #00c851;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #007e33;
+    }
+
+    #contact {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .phone-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .phone-number {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      white-space: nowrap;
+      font-family: monospace;
+      font-size: 14px;
+      z-index: 10;
+      cursor: pointer;
+      user-select: text;
+    }
+
+    .phone-number::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-bottom-color: #333;
+    }
+
+    .phone-number.show {
+      display: block;
+    }
+
+    .copy-feedback {
+      background: #28a745 !important;
+    }
+
+    .email-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .email-address {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-top: 10px;
+      white-space: nowrap;
+      font-family: monospace;
+      font-size: 14px;
+      z-index: 10;
+      cursor: pointer;
+      user-select: text;
+    }
+
+    .email-address::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-bottom-color: #333;
+    }
+
+    .email-address.show {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      header, .projects-section, #contact {
+        padding: 20px;
+      }
+      
+      h1 {
+        font-size: 2em;
+      }
+      
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skill-category {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skill-items {
+        gap: 6px;
+      }
+
+      .skill-item {
+        font-size: 0.8em;
+        padding: 6px 12px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, I’m Aslan not Aouchev</h1>
-  <p>Welcome to my portfolio website!</p>
+  <div class="container">
+    <header>
+      <h1>Hello, I'm Aslan Aouchev</h1>
+      <p class="subtitle">Game Developer & AI Programmer</p>
+    </header>
 
-  <script src="script.js"></script>
+    <section class="projects-section">
+      <h2>My Game Projects</h2>
+      <p>Here are some of the games I've helped create:</p>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3 class="project-title">RacnRun</h3>
+          <p class="project-description">
+            In this local couch coop game i made the ai and sound.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-tag">Unreal Engine 5.5</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">3D</span>
+          </div>
+            <img src="images/racnrun-screenshot.png" alt="RacnRun game screenshot" class="project-image">
+          <div class="project-links">
+            <a href="https://hadessperanskaya.itch.io/raccnrun" target="_blank" class="btn">Visit Page</a>
+          </div>
+        </div>
 
-  <section id="contact">
-  <h2>Contact Me</h2>
-  <p>
-    <a href="https://github.com/ac-co" target="_blank">
-      Visit my GitHub
-    </a>
-  </p>
-</section>
+        <div class="project-card">
+          <h3 class="project-title">The Forged Loop</h3>
+          <p class="project-description">
+            In this tower defense game i made the ai and the sound.
+          </p>
+          <div class="tech-stack">
+            <span class="tech-tag">Unreal Engine 5.6</span>
+            <span class="tech-tag">C++</span>
+            <span class="tech-tag">3D</span>
+          </div>
+          <img src="images/forged-loop-screenshot.png" alt="The Forged Loop game screenshot" class="project-image">
+          <div class="project-links">
+            <a href="https://oussama-aouchev.itch.io/the-forged-loop" target="_blank" class="btn">Visit Page</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<section class="projects-section">
+      <h2>Skills & Expertise</h2>
+      <p>Specialized in AI Programming with focus on fun but also challenging gameplay experiences</p>
+      
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>AI Programming</h3>
+          <div class="skill-items">
+            <span class="skill-item">Hierarchical Finite State Machines (HFSM)</span>
+            <span class="skill-item">Behavior Trees</span>
+            <span class="skill-item">Utility-Based AI</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Game Engines & Tools</h3>
+          <div class="skill-items">
+            <span class="skill-item">Unreal Engine 5</span>
+            <span class="skill-item">Blueprint System</span>
+            <span class="skill-item">AI Controller</span>
+            <span class="skill-item">Blackboard System</span>
+            <span class="skill-item">Navigation System</span>
+            <span class="skill-item">AI Perception</span>
+            <span class="skill-item">Animation Blueprints</span>
+            <span class="skill-item">EQS System</span>
+            <span class="skill-item">Smart Objects</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Programming Languages</h3>
+          <div class="skill-items">
+            <span class="skill-item">C++</span>
+            <span class="skill-item">Blueprint Visual Scripting</span>
+            <span class="skill-item">C#</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p>Let's connect! I'm always interested in discussing game development and new opportunities.</p>
+      <div class="contact-links">
+        <a href="https://github.com/ac-co" target="_blank" class="btn">
+          GitHub
+        </a>
+        <div class="email-container">
+          <button class="btn" id="emailBtn">
+            Email Me
+          </button>
+          <div class="email-address" id="emailAddress">
+            aslanaouchev@gmail.com
+          </div>
+        </div>
+        <div class="phone-container">
+          <button class="btn btn-secondary" id="phoneBtn">
+            Phone Number
+          </button>
+          <div class="phone-number" id="phoneNumber">
+            +32 460 95 81 92
+          </div>
+        </div>
+        <a href="https://www.linkedin.com/in/aslan-aouchev-b7b056295" target="_blank" class="btn">
+          LinkedIn
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <script>    
+    document.addEventListener('DOMContentLoaded', function() {
+      const phoneBtn = document.getElementById('phoneBtn');
+      const phoneNumber = document.getElementById('phoneNumber');
+      
+      phoneBtn.addEventListener('click', function() {
+        phoneNumber.classList.toggle('show');
+        document.getElementById('emailAddress').classList.remove('show');
+      });
+      
+      phoneNumber.addEventListener('click', function() {
+        navigator.clipboard.writeText(phoneNumber.textContent.trim()).then(function() {
+          const originalText = phoneNumber.textContent;
+          phoneNumber.textContent = 'Copied!';
+          phoneNumber.classList.add('copy-feedback');
+          
+          setTimeout(function() {
+            phoneNumber.textContent = originalText;
+            phoneNumber.classList.remove('copy-feedback');
+          }, 1500);
+        });
+      });
+
+      const emailBtn = document.getElementById('emailBtn');
+      const emailAddress = document.getElementById('emailAddress');
+      
+      emailBtn.addEventListener('click', function() {
+        emailAddress.classList.toggle('show');
+        phoneNumber.classList.remove('show');
+      });
+      
+      emailAddress.addEventListener('click', function() {
+        navigator.clipboard.writeText(emailAddress.textContent.trim()).then(function() {
+          const originalText = emailAddress.textContent;
+          emailAddress.textContent = 'Copied!';
+          emailAddress.classList.add('copy-feedback');
+          
+          setTimeout(function() {
+            emailAddress.textContent = originalText;
+            emailAddress.classList.remove('copy-feedback');
+          }, 1500);
+        });
+      });
+      
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('.phone-container')) {
+          phoneNumber.classList.remove('show');
+        }
+        if (!event.target.closest('.email-container')) {
+          emailAddress.classList.remove('show');
+        }
+      });
+      
+      const links = document.querySelectorAll('a[href^="#"]');
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
